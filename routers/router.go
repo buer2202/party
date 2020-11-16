@@ -6,5 +6,8 @@ import (
 )
 
 func init() {
-    beego.Router("/", &controllers.MainController{})
+	beego.Router("/", &controllers.MainController{})
+
+	// 主页
+	beego.Router("/party", &controllers.PartyController{})
 }
