@@ -6,6 +6,7 @@ import (
 	"party2202.com/models"
 )
 
+// PartyController 聚会控制器
 type PartyController struct {
 	beego.Controller
 }
@@ -13,7 +14,7 @@ type PartyController struct {
 func (this *PartyController) Get() {
 	user := models.GetUser()
 	party, err := models.GetByUrlCode(this.Ctx.Input.Param(":id"))
-	if (err != nil) {
+	if err != nil {
 		this.Abort("404")
 	}
 

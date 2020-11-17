@@ -1,13 +1,14 @@
 package routers
 
 import (
-	"party2202.com/controllers"
 	"github.com/astaxie/beego"
+	"party2202.com/controllers"
 )
 
 func init() {
-	beego.Router("/", &controllers.MainController{})
+	// 首页
+	beego.Router("/", &controllers.IndexController{})
 
-	// 主页
+	// 聚会主页
 	beego.Router("/party/:id", &controllers.PartyController{})
 }
