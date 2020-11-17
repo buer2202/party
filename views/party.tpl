@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>2202</title>
+    <title>Party2202</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -13,7 +13,7 @@
 
 <body>
     <header class="demos-header">
-        <h1 class="demos-title">2202</h1>
+        <h1 class="demos-title">{{ .party }}</h1>
     </header>
 
     <div class="weui-cells__tips">

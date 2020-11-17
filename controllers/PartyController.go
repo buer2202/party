@@ -2,14 +2,22 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
+
+	"party2202.com/models"
 )
 
 type PartyController struct {
 	beego.Controller
 }
 
-func (c *PartyController) Get() {
-	c.Data["Website"] = "beego.me"
-	c.Data["Email"] = "astaxie@gmail.com"
-	c.TplName = "party.tpl"
+func (this *PartyController) Get() {
+	user := models.GetUser()
+	party, err := models.GetByUrlCode(this.Ctx.Input.Param(":id"))
+	if (err != nil) {
+		this.Abort("404")
+	}
+
+	this.Data["user"] = user.Account
+	this.Data["party"] = party
+	this.TplName = "party.tpl"
 }
