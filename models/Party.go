@@ -19,6 +19,6 @@ type Party struct {
 func GetByUrlCode(urlCode string) (model Party, err error) {
 	o := orm.NewOrm()
 	model = Party{UrlCode: urlCode}
-	err = o.Read(&model, "urlCode")
+	err = o.Read(&model, "url_code")
 	return
 }

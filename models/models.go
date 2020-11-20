@@ -6,6 +6,7 @@ import (
 )
 
 func init() {
+	orm.Debug = true
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	orm.RegisterDataBase("default", "mysql", "root:123456@tcp(10.0.31.254:3306)/party?charset=utf8")
 
@@ -13,5 +14,6 @@ func init() {
 	orm.RegisterModel(
 		new(User),
 		new(Party),
+		new(Member),
 	)
 }

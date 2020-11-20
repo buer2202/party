@@ -12,13 +12,13 @@ type PartyController struct {
 }
 
 func (this *PartyController) Get() {
-	user := models.GetUser()
 	party, err := models.GetByUrlCode(this.Ctx.Input.Param(":id"))
 	if err != nil {
 		this.Abort("404")
 	}
+	members := models.GetByUserId(party.UserId)
 
-	this.Data["user"] = user.Account
 	this.Data["party"] = party
+	this.Data["members"] = members
 	this.TplName = "party.tpl"
 }

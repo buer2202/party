@@ -13,11 +13,11 @@
 
 <body>
     <header class="demos-header">
-        <h1 class="demos-title">{{ .party }}</h1>
+        <h1 class="demos-title">{{ .party.Name }}</h1>
     </header>
 
     <div class="weui-cells__tips">
-        当前活动：
+        当前活动：{{ .party.PartyDesc }} {{ .members }}
     </div>
     <div id="inline-calendar"></div>
 
@@ -25,7 +25,7 @@
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">已选日期</label></div>
             <div class="weui-cell__bd">
-                <input id="input-choosed" class="weui-input" type="text" placeholder="选择你有空的时间">
+                <input id="input-choosed" class="weui-input" type="text" placeholder="点击可参加日期">
             </div>
         </div>
     </div>

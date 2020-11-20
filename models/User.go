@@ -1,8 +1,6 @@
 package models
 
 import (
-	"fmt"
-
 	"github.com/astaxie/beego/orm"
 )
 
@@ -16,14 +14,9 @@ type User struct {
 	UpdatedAt string
 }
 
-func GetUser() (User) {
+func GetUser(userId int) (model User, err error) {
 	o := orm.NewOrm()
-	user := User{Id: 1}
-
-	err := o.Read(&user, "Id")
-	if err != nil {
-		fmt.Println("没有找到")
-	}
-
-	return user
+	model = User{Id: userId}
+	err = o.Read(&model, "user_id")
+	return
 }
