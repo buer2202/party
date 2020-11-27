@@ -10,5 +10,5 @@ func init() {
 	beego.Router("/", &controllers.IndexController{})
 
 	// 聚会主页
-	beego.Router("/party/:id", &controllers.PartyController{})
+	beego.Router("/party/:urlCode", &controllers.PartyController{})
 }

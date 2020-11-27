@@ -16,8 +16,8 @@ type Party struct {
 	UpdatedAt   string
 }
 
-// GetByUrlCode 用urlCode查询
-func GetByUrlCode(urlCode string) (model Party, err error) {
+// PartyGetByUrlCode 用urlCode查询
+func PartyGetByUrlCode(urlCode string) (model Party, err error) {
 	o := orm.NewOrm()
 	model = Party{UrlCode: urlCode}
 	err = o.Read(&model, "url_code")

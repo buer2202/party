@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/astaxie/beego/orm"
+	"party2202.com/common"
 )
 
 type Member struct {
@@ -12,12 +13,12 @@ type Member struct {
 	UpdatedAt string
 }
 
-func GetByUserId(userId int) (dataList []*Member) {
+func MemberGetByUserId(userId int) (dataList []*Member) {
 	o := orm.NewOrm()
 	model := new(Member)
 	_, err := o.QueryTable(model).Filter("user_id", userId).All(&dataList)
 	if err != nil {
-
+		common.MyLog("db_err", err.Error())
 	}
 
 	return

@@ -15,5 +15,6 @@ func init() {
 		new(User),
 		new(Party),
 		new(Member),
+		new(PartyMember),
 	)
 }

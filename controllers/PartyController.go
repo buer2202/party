@@ -13,14 +13,16 @@ type PartyController struct {
 
 // Get 主页
 func (p *PartyController) Get() {
-	
-	party, err := models.GetByUrlCode(p.Ctx.Input.Param(":id"))
+	party, err := models.PartyGetByUrlCode(p.Ctx.Input.Param(":urlCode"))
 	if err != nil {
 		p.Abort("404")
 	}
-	members := models.GetByUserId(party.UserId)
+	members := models.MemberGetByUserId(party.UserId)
+	partyMemberDate := models.PartyMemberGetDateByPartyId(party.Id)
 
+	p.Data["urlCode"] = p.Ctx.Input.Param(":urlCode")
 	p.Data["party"] = party
 	p.Data["members"] = members
+	p.Data["partyMemberDate"] = partyMemberDate
 	p.TplName = "party.tpl"
 }
