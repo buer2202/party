@@ -11,14 +11,16 @@ type PartyController struct {
 	beego.Controller
 }
 
-func (this *PartyController) Get() {
-	party, err := models.GetByUrlCode(this.Ctx.Input.Param(":id"))
+// Get 主页
+func (p *PartyController) Get() {
+	
+	party, err := models.GetByUrlCode(p.Ctx.Input.Param(":id"))
 	if err != nil {
-		this.Abort("404")
+		p.Abort("404")
 	}
 	members := models.GetByUserId(party.UserId)
 
-	this.Data["party"] = party
-	this.Data["members"] = members
-	this.TplName = "party.tpl"
+	p.Data["party"] = party
+	p.Data["members"] = members
+	p.TplName = "party.tpl"
 }

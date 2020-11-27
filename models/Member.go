@@ -4,7 +4,6 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
-// Member Model
 type Member struct {
 	Id        int
 	UserId    int
@@ -13,10 +12,13 @@ type Member struct {
 	UpdatedAt string
 }
 
-func GetByUserId(userId int) []*Member {
+func GetByUserId(userId int) (dataList []*Member) {
 	o := orm.NewOrm()
-    model := new(Member)
-    var dataList []*Member
-	o.QueryTable(model).Filter("user_id", userId).All(dataList)
-	return dataList
+	model := new(Member)
+	_, err := o.QueryTable(model).Filter("user_id", userId).All(&dataList)
+	if err != nil {
+
+	}
+
+	return
 }
