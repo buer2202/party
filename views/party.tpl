@@ -116,7 +116,7 @@
             if (data) {
                 var tdClassName;
                 for (const i in data) {
-                    tdClassName = '.' + data[i].MemberID + '-' + data[i].CanJoinDate;
+                    tdClassName = '.' + data[i].MemberId + '-' + data[i].CanJoinDate;
                     $(tdClassName).addClass('can-join').text(data[i].JoinPeopleNum);
                 }
             }

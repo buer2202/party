@@ -1,46 +1,44 @@
-body, html {
+body,
+html {
     height: 100%;
     -webkit-tap-highlight-color: transparent;
     background-color: #fbfbfb;
 }
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
 
-.demos-title {
+.title {
+    margin-top: 15px;
     text-align: center;
     font-size: 24px;
     color: #3cc51f;
-    font-weight: 400;
-    margin: 0 15%;
+    font-weight: bold;
+    line-height: 80px;
 }
 
-/* .demos-sub-title {
+.result {
+    margin: 20px 10px 10px 10px;
+    font-weight: bold;
+}
+
+.my-table {
+    width: 100%;
+}
+.my-table, .my-table td {
+    border: 1px solid #ddd;
+}
+.my-table td {
     text-align: center;
-    color: #888;
-    font-size: 14px;
+}
+.my-table td.can-join {
+    color: #fff;
+    background-color: #3cc51f;
 }
 
-.demos-header {
-    padding: 20px 0;
-}
-
-.demos-content-padded {
-    padding: 0 15px;
-}
-
-.demos-second-title {
+.footer {
     text-align: center;
-    font-size: 24px;
-    color: #3cc51f;
-    font-weight: 400;
-    margin: 0 15%;
+    margin-top: 500px;
+    height: 240px;
 }
-
-footer {
-    text-align: center;
-    font-size: 14px;
-    padding: 20px;
-}
-
-footer a {
-    color: #999;
-    text-decoration: none;
-} */

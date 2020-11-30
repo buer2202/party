@@ -26,3 +26,14 @@ func (p *PartyController) Get() {
 	p.Data["partyMemberDate"] = partyMemberDate
 	p.TplName = "party.tpl"
 }
+
+// PartyMembers 获取活动成员
+func (p *PartyController) PartyMembers() {
+	party, err := models.PartyGetByUrlCode(p.Ctx.Input.Param(":urlCode"))
+	if err != nil {
+		p.Abort("404")
+	}
+
+	p.Data["json"] = models.PartyMemberGetByPartyId(party.Id)
+	p.ServeJSON()
+}
