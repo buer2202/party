@@ -102,12 +102,12 @@
                 join_people_num: $('#join_people_num').val(),
                 can_join_date: $('#can_join_date').val()
             }, function (data) {
-                if (data) {
-                    $.toast("操作成功", function () {
+                if (data.Status) {
+                    $.toast(data.Message, function () {
                         window.location.reload();
                     });
                 } else {
-                    $.toast("提交失败");
+                    $.toast(data.Message, 'forbidden');
                 }
             }, 'json');
         });

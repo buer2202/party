@@ -4,6 +4,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/validation"
 
+	"party2202.com/common"
 	"party2202.com/models"
 )
 
@@ -51,25 +52,27 @@ func (p *PartyController) Post() {
 	valid.Required(joinPeopleNum, "join_people_num")
 	valid.Required(canJoinDate, "can_join_date")
 	if valid.HasErrors() {
-		p.Data["json"] = false
+		p.Data["json"] = common.Ajax(0, "请填写完整", "")
 		p.ServeJSON()
-		// for _, err := range valid.Errors {
-		// 	log.Println(err.Key, err.Message)
-		// }
 	}
 
 	party, err := (&models.Party{}).GetByUrlCode(p.Ctx.Input.Param(":urlCode"))
 	if err != nil {
-		p.Data["json"] = false
+		p.Data["json"] = common.Ajax(0, "获取活动ID失败", "")
 		p.ServeJSON()
 	}
 
-	p.Data["json"] = (&models.PartyMember{}).AddPartyMember(
+	rlst := (&models.PartyMember{}).AddPartyMember(
 		party.Id,
 		memberId,
 		joinPeopleNum,
 		canJoinDate,
 	)
+	if (!rlst) {
+		p.Data["json"] = common.Ajax(0, "数据写入失败", "")
+		p.ServeJSON()
+	}
 
+	p.Data["json"] = common.Ajax(1, "提交成功", "")
 	p.ServeJSON()
 }
