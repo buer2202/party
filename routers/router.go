@@ -11,6 +11,8 @@ func init() {
 
 	// 聚会主页
 	beego.Router("/party/:urlCode", &controllers.PartyController{})
-	// 获取投票情况
+	// 获取参与情况
 	beego.Router("/party/:urlCode/party-members", &controllers.PartyController{}, "get:PartyMembers")
+	// 提交参与
+	beego.Router("/party/:urlCode", &controllers.PartyController{})
 }
