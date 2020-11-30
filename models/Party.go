@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/astaxie/beego/orm"
+	"party2202.com/common"
 )
 
 // Party Model
@@ -16,10 +17,13 @@ type Party struct {
 	UpdatedAt   string
 }
 
-// PartyGetByUrlCode 用urlCode查询
-func PartyGetByUrlCode(urlCode string) (model Party, err error) {
-	o := orm.NewOrm()
-	model = Party{UrlCode: urlCode}
-	err = o.Read(&model, "url_code")
+// GetByUrlCode 用urlCode查询
+func (p *Party) GetByUrlCode(urlCode string) (data Party, err error) {
+	qs := orm.NewOrm().QueryTable(p)
+	err = qs.Filter("url_code", urlCode).One(&data)
+	if err != nil {
+		common.MyLog("db_err", err.Error())
+	}
+
 	return
 }

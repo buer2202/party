@@ -15,22 +15,20 @@ type PartyMember struct {
 	UpdatedAt     string
 }
 
-// GetPartyMemberByPartyId 根据PartyID获取所有报名的日期，不重复
-func PartyMemberGetDateByPartyId(partyId int) (dataList []*PartyMember) {
-	o := orm.NewOrm()
-	model := new(PartyMember)
-	_, err := o.QueryTable(model).Distinct().Filter("party_id", partyId).OrderBy("can_join_date").All(&dataList, "can_join_date")
+// GetPartyDate 根据PartyID获取所有报名的日期，不重复
+func (p *PartyMember) GetPartyDate(partyId int) (dataList []*PartyMember) {
+	qs := orm.NewOrm().QueryTable(p)
+	_, err := qs.Distinct().Filter("party_id", partyId).OrderBy("can_join_date").All(&dataList, "can_join_date")
 	if err != nil {
 		common.MyLog("db_err", err.Error())
 	}
 	return
 }
 
-// PartyMemberGetByPartyId 根据PartyID获取参与人员
-func PartyMemberGetByPartyId(partyId int) (dataList []*PartyMember) {
-	o := orm.NewOrm()
-	model := new(PartyMember)
-	_, err := o.QueryTable(model).Filter("party_id", partyId).All(&dataList, "party_id", "member_id", "join_people_num", "can_join_date")
+// GetPartyMember 根据PartyID获取参与人员
+func (p *PartyMember) GetPartyMember(partyId int) (dataList []*PartyMember) {
+	qs := orm.NewOrm().QueryTable(p)
+	_, err := qs.Filter("party_id", partyId).All(&dataList, "party_id", "member_id", "join_people_num", "can_join_date")
 	if err != nil {
 		common.MyLog("db_err", err.Error())
 	}

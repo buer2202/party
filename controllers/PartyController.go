@@ -13,12 +13,12 @@ type PartyController struct {
 
 // Get 主页
 func (p *PartyController) Get() {
-	party, err := models.PartyGetByUrlCode(p.Ctx.Input.Param(":urlCode"))
+	party, err := (&models.Party{}).GetByUrlCode(p.Ctx.Input.Param(":urlCode"))
 	if err != nil {
 		p.Abort("404")
 	}
 	members := models.MemberGetByUserId(party.UserId)
-	partyMemberDate := models.PartyMemberGetDateByPartyId(party.Id)
+	partyMemberDate := (&models.PartyMember{}).GetPartyDate(party.Id)
 
 	p.Data["urlCode"] = p.Ctx.Input.Param(":urlCode")
 	p.Data["party"] = party
@@ -29,11 +29,12 @@ func (p *PartyController) Get() {
 
 // PartyMembers 获取活动成员
 func (p *PartyController) PartyMembers() {
-	party, err := models.PartyGetByUrlCode(p.Ctx.Input.Param(":urlCode"))
+	party, err := (&models.Party{}).GetByUrlCode(p.Ctx.Input.Param(":urlCode"))
 	if err != nil {
-		p.Abort("404")
+		p.Data["json"] = [0]int{}
+	} else {
+		p.Data["json"] = (&models.PartyMember{}).GetPartyMember(party.Id)
 	}
 
-	p.Data["json"] = models.PartyMemberGetByPartyId(party.Id)
 	p.ServeJSON()
 }
