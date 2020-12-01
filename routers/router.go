@@ -6,6 +6,9 @@ import (
 )
 
 func init() {
+	// 错误页面
+	beego.ErrorController(&controllers.ErrorController{})
+
 	// 首页
 	beego.Router("/", &controllers.IndexController{})
 
