@@ -7,11 +7,11 @@ import (
 )
 
 func init() {
-	// orm.Debug = true
 	dataSource := beego.AppConfig.String("mysqluser") + ":" + beego.AppConfig.String("mysqlpass")
 	dataSource += "@tcp(" + beego.AppConfig.String("mysqlurls") + ")"
 	dataSource += "/" + beego.AppConfig.String("mysqldb") + "?charset=utf8"
 
+	// orm.Debug = true
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	orm.RegisterDataBase("default", "mysql", dataSource)
 
