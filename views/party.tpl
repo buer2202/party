@@ -97,7 +97,7 @@
 
         // 提交
         $('#submit').click(function () {
-            $.post('/party/{{ .urlCode }}', {
+            $.post('{{ urlfor "PartyController.Post" ":urlCode" .party.UrlCode }}', {
                 member_id: $('#member_id').val(),
                 join_people_num: $('#join_people_num').val(),
                 can_join_date: $('#can_join_date').val()
@@ -112,7 +112,7 @@
             }, 'json');
         });
 
-        $.get('/party/{{ .party.UrlCode }}/party-members', function (data) {
+        $.get('{{ urlfor "PartyController.PartyMembers" ":urlCode" .party.UrlCode }}', function (data) {
             if (data) {
                 var tdClassName;
                 for (const i in data) {
