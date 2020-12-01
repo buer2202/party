@@ -13,10 +13,9 @@ type Member struct {
 	UpdatedAt string
 }
 
-func MemberGetByUserId(userId int) (dataList []*Member) {
-	o := orm.NewOrm()
-	model := new(Member)
-	_, err := o.QueryTable(model).Filter("user_id", userId).All(&dataList)
+func (m *Member) ByUserId(userId int) (dataList []*Member) {
+	qs := orm.NewOrm().QueryTable(m)
+	_, err := qs.Filter("user_id", userId).All(&dataList)
 	if err != nil {
 		common.MyLog("db_err", err.Error())
 	}

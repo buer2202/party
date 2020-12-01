@@ -14,9 +14,9 @@ type User struct {
 	UpdatedAt string
 }
 
-func GetUser(userId int) (model User, err error) {
-	o := orm.NewOrm()
-	model = User{Id: userId}
-	err = o.Read(&model, "user_id")
+func (m *User) Login(account string, password string) (data User, err error) {
+	qs := orm.NewOrm().QueryTable(m)
+	err = qs.Filter("account", account).One(&data)
+
 	return
 }

@@ -19,8 +19,8 @@ type PartyMember struct {
 }
 
 // GetPartyDate 根据PartyID获取所有报名的日期，不重复
-func (p *PartyMember) GetPartyDate(partyId int) (dataList []*PartyMember) {
-	qs := orm.NewOrm().QueryTable(p)
+func (m *PartyMember) GetPartyDate(partyId int) (dataList []*PartyMember) {
+	qs := orm.NewOrm().QueryTable(m)
 	_, err := qs.Distinct().Filter("party_id", partyId).OrderBy("can_join_date").All(&dataList, "can_join_date")
 	if err != nil {
 		common.MyLog("db_err", err.Error())
@@ -29,8 +29,8 @@ func (p *PartyMember) GetPartyDate(partyId int) (dataList []*PartyMember) {
 }
 
 // GetPartyMember 根据PartyID获取参与人员
-func (p *PartyMember) GetPartyMember(partyId int) (dataList []*PartyMember) {
-	qs := orm.NewOrm().QueryTable(p)
+func (m *PartyMember) GetPartyMember(partyId int) (dataList []*PartyMember) {
+	qs := orm.NewOrm().QueryTable(m)
 	_, err := qs.Filter("party_id", partyId).All(&dataList, "party_id", "member_id", "join_people_num", "can_join_date")
 	if err != nil {
 		common.MyLog("db_err", err.Error())
@@ -39,9 +39,9 @@ func (p *PartyMember) GetPartyMember(partyId int) (dataList []*PartyMember) {
 }
 
 // AddPartyMember 添加参与记录
-func (p *PartyMember) AddPartyMember(partyId int, memberId int, joinPeopleNum int, canJoinDate string) bool {
+func (m *PartyMember) AddPartyMember(partyId int, memberId int, joinPeopleNum int, canJoinDate string) bool {
 	canJoinDateArr := strings.Split(canJoinDate, ",")
-	qs := orm.NewOrm().QueryTable(p)
+	qs := orm.NewOrm().QueryTable(m)
 
 	// 先删除以前的
 	_, err := qs.Filter("party_id", partyId).Filter("member_id", memberId).Delete()
