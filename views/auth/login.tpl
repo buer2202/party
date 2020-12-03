@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="title">Hello 2202!</div>
+    <div class="logo"><img src="/static/img/logo.jpg"></div>
 
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
@@ -43,11 +43,10 @@
                 account: $('#account').val(),
                 password: $('#password').val()
             }, function (data, load) {
-                layer.close(load);
                 if (data.Status) {
-                    // window.location.href = "{{ urlfor "" }}";
-                    layer.alert(data.Message, {icon: 6});
+                    window.location.href = '{{ urlfor "UserController.Get" }}';
                 } else {
+                    layer.close(load);
                     layer.msg(data.Message, {icon: 5});
                 }
             });

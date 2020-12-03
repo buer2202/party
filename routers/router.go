@@ -10,7 +10,7 @@ func init() {
 	beego.ErrorController(&controllers.ErrorController{})
 
 	// 欢迎页
-	beego.Router("/", &controllers.IndexController{})
+	beego.Router("/test", &controllers.TestController{})
 
 	// 聚会主页
 	beego.Router("/party/:urlCode", &controllers.PartyController{})
@@ -20,7 +20,7 @@ func init() {
 	beego.Router("/party/:urlCode", &controllers.PartyController{})
 
 	// 用户认证
-	beego.Router("/login", &controllers.AuthController{}, "get:LoginForm")
+	beego.Router("/", &controllers.AuthController{}, "get:LoginForm")
 	beego.Router("/login", &controllers.AuthController{}, "post:Login")
 	beego.Router("/logout", &controllers.AuthController{}, "post:Logout")
 
