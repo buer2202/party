@@ -15,16 +15,19 @@ func (c *AuthController) LoginForm() {
 }
 
 func (c *AuthController) Login() {
-	_, err := (&models.User{}).Login(c.GetString("account"), c.GetString("password"))
+	user, err := (&models.User{}).Login(c.GetString("account"), c.GetString("password"))
 	if err != nil {
-		c.Data["json"] = common.Ajax(0, "数据写入失败", "")
+		c.Data["json"] = err.Error()
 		c.ServeJSON()
-    }
+		c.StopRun()
+	}
 
-	c.Data["json"] = common.Ajax(1, "提交成功", "")
+	c.SetSession("authUser", user)
+
+	c.Data["json"] = common.Ajax(1, "登录成功", "")
 	c.ServeJSON()
 }
 
 func (c *AuthController) Logout() {
-
+	c.DestroySession()
 }
