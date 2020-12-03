@@ -35,6 +35,24 @@
 
     <script src="/static/plug-in/jquery-weui/lib/jquery-2.1.4.js"></script>
     <script src="/static/plug-in/jquery-weui/js/jquery-weui.js"></script>
+    <script src="/static/plug-in/layer/layer.js"></script>
+    <script src="/static/js/buer_post.js"></script>
+    <script>
+        $('#submit').click(function () {
+            buer_post('{{ urlfor "AuthController.Login" }}', {
+                account: $('#account').val(),
+                password: $('#password').val()
+            }, function (data, load) {
+                layer.close(load);
+                if (data.Status) {
+                    // window.location.href = "{{ urlfor "" }}";
+                    layer.alert(data.Message, {icon: 6});
+                } else {
+                    layer.msg(data.Message, {icon: 5});
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -87,6 +87,8 @@
 
     <script src="/static/plug-in/jquery-weui/lib/jquery-2.1.4.js"></script>
     <script src="/static/plug-in/jquery-weui/js/jquery-weui.js"></script>
+    <script src="/static/plug-in/layer/layer.js"></script>
+    <script src="/static/js/buer_post.js"></script>
     <script>
         $("#inline-calendar").calendar({
             container: "#inline-calendar",
@@ -97,19 +99,11 @@
 
         // 提交
         $('#submit').click(function () {
-            $.post('{{ urlfor "PartyController.Post" ":urlCode" .party.UrlCode }}', {
+            buer_post('{{ urlfor "PartyController.Post" ":urlCode" .party.UrlCode }}', {
                 member_id: $('#member_id').val(),
                 join_people_num: $('#join_people_num').val(),
                 can_join_date: $('#can_join_date').val()
-            }, function (data) {
-                if (data.Status) {
-                    $.toast(data.Message, function () {
-                        window.location.reload();
-                    });
-                } else {
-                    $.toast(data.Message, 'forbidden');
-                }
-            }, 'json');
+            });
         });
 
         $.get('{{ urlfor "PartyController.PartyMembers" ":urlCode" .party.UrlCode }}', function (data) {

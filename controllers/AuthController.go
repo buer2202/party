@@ -17,7 +17,7 @@ func (c *AuthController) LoginForm() {
 func (c *AuthController) Login() {
 	user, err := (&models.User{}).Login(c.GetString("account"), c.GetString("password"))
 	if err != nil {
-		c.Data["json"] = err.Error()
+		c.Data["json"] = common.Ajax(0, err.Error(), "")
 		c.ServeJSON()
 		c.StopRun()
 	}
@@ -30,4 +30,6 @@ func (c *AuthController) Login() {
 
 func (c *AuthController) Logout() {
 	c.DestroySession()
+	c.Data["json"] = common.Ajax(1, "注销成功", "")
+	c.ServeJSON()
 }

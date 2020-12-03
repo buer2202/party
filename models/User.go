@@ -23,7 +23,6 @@ func (m *User) Login(account string, password string) (data User, err error) {
 	if err != nil {
 		return data, errors.New("账号不存在")
 	}
-
 	if data.Password != common.HashSha256(password) {
 		return data, errors.New("密码错误")
 	}

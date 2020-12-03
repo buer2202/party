@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/astaxie/beego"
 )
 
@@ -10,5 +11,6 @@ type IndexController struct {
 }
 
 func (c *IndexController) Get() {
+	fmt.Println(c.GetSession("authUser"))
 	c.TplName = "index.tpl"
 }

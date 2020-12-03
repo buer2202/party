@@ -13,12 +13,13 @@ func MyLog(fileName string, contents string) {
 }
 
 // ajax响应格式
-type ajax struct {
-    Status  int
-    Message string
-    Content string
+type AjaxResponseData struct {
+	Status  int
+	Message string
+	Content string
 }
-func Ajax(status int, message string, content string) (data ajax) {
+
+func Ajax(status int, message string, content string) (data AjaxResponseData) {
 	data.Status = status
 	data.Message = message
 	data.Content = content
