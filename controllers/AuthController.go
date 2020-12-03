@@ -15,7 +15,8 @@ func (c *AuthController) LoginForm() {
 		c.Redirect(beego.URLFor("UserController.Get"), 302)
 		c.StopRun()
 	}
-	
+
+	c.Layout = "layout.html"
 	c.TplName = "auth/login.tpl"
 }
 
