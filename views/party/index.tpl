@@ -1,8 +1,7 @@
-<div class="title">{{ .party.Name }}</div>
+<h1 class="title">{{ .party.Name }}</h1>
 
-<div class="weui-cells__tips">
-    当前活动：{{ .party.PartyDesc }}
-</div>
+<div class="section">当前活动：</div>
+<div class="weui-cells__tips">{{ .party.PartyDesc }}</div>
 
 <div class="weui-cells weui-cells_form">
     <div class="weui-cell weui-cell_select weui-cell_select-after">
@@ -46,9 +45,7 @@
     <button class="weui-btn weui-btn_primary" id="submit">提交</button>
 </div>
 
-<div class="result">
-    报名情况：
-</div>
+<div class="section">报名情况：</div>
 <table class="my-table">
     <tr>
         <td>日期\人员</td>
@@ -66,10 +63,8 @@
     {{ end }}
 </table>
 
-<div class="footer">
-    <img src="/static/img/logo.jpg" />
-    <div class="weui-msg__desc">Power by 不耳 2020.11</div>
-</div>
+<div class="section">确认方案：</div>
+<div class="confirm-desc">数据库打连分看见啦士大夫</div>
 
 <script>
     $("#inline-calendar").calendar({

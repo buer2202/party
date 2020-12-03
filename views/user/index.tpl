@@ -1,4 +1,4 @@
-<div class="title">管理中心</div>
+<div class="title">Hello {{ .authUser.Nickname }}！</div>
 <div class="weui-grids">
     <a href="" class="weui-grid js_grid">
         <div class="weui-grid__icon">

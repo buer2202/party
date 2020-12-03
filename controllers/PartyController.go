@@ -66,6 +66,12 @@ func (c *PartyController) Post() {
 		c.StopRun()
 	}
 
+	if party.ConfirmDesc != "" {
+		c.Data["json"] = common.Ajax(0, "该活动已停止报名", "")
+		c.ServeJSON()
+		c.StopRun()
+	}
+
 	rlst := (&models.PartyMember{}).AddPartyMember(
 		party.Id,
 		memberId,
