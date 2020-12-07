@@ -11,5 +11,5 @@ type UserController struct {
 func (c *UserController) Get() {
 	c.Data["authUser"] = c.GetSession("authUser")
 	c.Layout = "layout.html"
-	c.TplName = "user/index.tpl"
+	c.TplName = "admin/user/index.tpl"
 }

@@ -28,7 +28,7 @@ func (c *PartyController) Get() {
 	c.Data["partyMemberDate"] = partyMemberDate
 
 	c.Layout = "layout.html"
-	c.TplName = "party/index.tpl"
+	c.TplName = "home/party/index.tpl"
 }
 
 // PartyMembers 获取活动成员

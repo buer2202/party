@@ -12,7 +12,7 @@ type AuthController struct {
 
 func (c *AuthController) LoginForm() {
 	c.Layout = "layout.html"
-	c.TplName = "auth/login.tpl"
+	c.TplName = "home/auth/login.tpl"
 }
 
 func (c *AuthController) Login() {
