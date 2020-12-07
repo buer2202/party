@@ -8,11 +8,11 @@ type PartyController struct {
 	beego.Controller
 }
 
-func (c *UserController) Create() {
+func (c *PartyController) Create() {
     c.Layout = "layout.html"
-	c.TplName = "user/index.tpl"
+	c.TplName = "admin/party/create.tpl"
 }
 
-func (c *UserController) Store() {
+func (c *PartyController) Store() {
 
 }

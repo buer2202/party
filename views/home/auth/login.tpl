@@ -1,4 +1,4 @@
-<div class="logo"><img src="/static/img/logo.jpg"></div>
+<h1 class="title">用户登录</h1>
 
 <div class="weui-cells weui-cells_form">
     <div class="weui-cell">

@@ -1,6 +1,6 @@
 <div class="title">Hello {{ .authUser.Nickname }}！</div>
 <div class="weui-grids">
-    <a href="" class="weui-grid js_grid">
+    <a href='{{ urlfor "PartyController.Create" }}' class="weui-grid js_grid">
         <div class="weui-grid__icon">
             <img src="/static/img/icon_nav_dialog.png" alt="">
         </div>

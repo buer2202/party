@@ -64,7 +64,7 @@
 </table>
 
 <div class="section">确认方案：</div>
-<div class="confirm-desc">数据库打连分看见啦士大夫</div>
+<div class="confirm-desc">{{ .party.ConfirmDesc }}</div>
 
 <script>
     $("#inline-calendar").calendar({

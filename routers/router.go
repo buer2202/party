@@ -26,5 +26,9 @@ func init() {
 	beego.Router("/logout", &home.AuthController{}, "post:Logout")
 
 	// 用户前台
+	// 导航页
 	beego.Router("/admin/user", &admin.UserController{})
+
+	// 聚会管理
+	beego.Router("/admin/party/create", &admin.PartyController{}, "get:Create")
 }
