@@ -26,5 +26,5 @@ func init() {
 	beego.Router("/logout", &home.AuthController{}, "post:Logout")
 
 	// 用户前台
-	beego.Router("/user", &admin.UserController{})
+	beego.Router("/admin/user", &admin.UserController{})
 }

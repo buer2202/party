@@ -11,11 +11,6 @@ type AuthController struct {
 }
 
 func (c *AuthController) LoginForm() {
-	if (c.GetSession("authUser") != nil) {
-		c.Redirect(beego.URLFor("UserController.Get"), 302)
-		c.StopRun()
-	}
-
 	c.Layout = "layout.html"
 	c.TplName = "auth/login.tpl"
 }
