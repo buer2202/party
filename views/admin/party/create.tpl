@@ -4,7 +4,7 @@
 <div class="weui-cells">
     <div class="weui-cell">
         <div class="weui-cell__bd">
-            <input id="name" class="weui-input" type="text" placeholder="请输入">
+            <input id="party_name" class="weui-input" type="text" placeholder="请输入" autocomplete="off">
         </div>
     </div>
 </div>
@@ -23,11 +23,11 @@
 <script>
     $('#submit').click(function () {
         buer_post('{{ urlfor "admin.PartyController.Store" }}', {
-            account: $('#account').val(),
-            password: $('#password').val()
+            name: $('#party_name').val(),
+            party_desc: $('#party_desc').val()
         }, function (data, load) {
             if (data.Status) {
-                window.location.reload();
+                layer.alert("ok");
             } else {
                 layer.close(load);
                 layer.msg(data.Message, {
