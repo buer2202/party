@@ -19,6 +19,29 @@ type Party struct {
 	UpdatedAt   string
 }
 
+func (m *Party) GetList(userId int, pageNo int64) common.Page {
+	// 分页参数
+	var pageSize int64
+	pageSize = 5
+	offset := (pageNo - 1) * pageSize
+
+	qs := orm.NewOrm().QueryTable(m)
+	count, err0 := qs.Filter("user_id", userId).Limit(pageSize, offset).Count()
+	if err0 != nil {
+		common.MyLog("db_err", err0.Error())
+		return common.Page{}
+	}
+
+	var dataList []*Party
+	_, err1 := qs.Filter("user_id", userId).Limit(pageSize, offset).All(&dataList)
+	if err1 != nil {
+		common.MyLog("db_err", err1.Error())
+		return common.Page{}
+	}
+
+	return common.PageUtil(count, pageNo, pageSize, dataList)
+}
+
 // GetByUrlCode 用urlCode查询
 func (m *Party) GetByUrlCode(urlCode string) (data Party, err error) {
 	qs := orm.NewOrm().QueryTable(m)

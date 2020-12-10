@@ -24,6 +24,7 @@ func (m *PartyMember) GetPartyDate(partyId int) (dataList []*PartyMember) {
 	_, err := qs.Distinct().Filter("party_id", partyId).OrderBy("can_join_date").All(&dataList, "can_join_date")
 	if err != nil {
 		common.MyLog("db_err", err.Error())
+		return nil
 	}
 	return
 }
@@ -34,6 +35,7 @@ func (m *PartyMember) GetPartyMember(partyId int) (dataList []*PartyMember) {
 	_, err := qs.Filter("party_id", partyId).All(&dataList, "party_id", "member_id", "join_people_num", "can_join_date")
 	if err != nil {
 		common.MyLog("db_err", err.Error())
+		return nil
 	}
 	return
 }

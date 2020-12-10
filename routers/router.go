@@ -3,8 +3,8 @@ package routers
 import (
 	"github.com/astaxie/beego"
 	"party2202.com/controllers"
-	"party2202.com/controllers/home"
 	"party2202.com/controllers/admin"
+	"party2202.com/controllers/home"
 )
 
 func init() {
@@ -30,6 +30,9 @@ func init() {
 	beego.Router("/admin/user", &admin.UserController{})
 
 	// 聚会管理
+	beego.Router("/admin/party/index", &admin.PartyController{}, "get:Index")
+	beego.Router("/admin/party/data-list", &admin.PartyController{}, "get:DataList")
 	beego.Router("/admin/party/create", &admin.PartyController{}, "get:Create")
 	beego.Router("/admin/party/store", &admin.PartyController{}, "post:Store")
+	beego.Router("/admin/party/:id/update", &admin.PartyController{}, "post:Update")
 }

@@ -18,6 +18,7 @@ func (m *Member) ByUserId(userId int) (dataList []*Member) {
 	_, err := qs.Filter("user_id", userId).All(&dataList)
 	if err != nil {
 		common.MyLog("db_err", err.Error())
+		return nil
 	}
 
 	return

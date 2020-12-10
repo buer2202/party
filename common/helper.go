@@ -16,10 +16,10 @@ func MyLog(fileName string, contents string) {
 type AjaxResponseData struct {
 	Status  int
 	Message string
-	Content string
+	Content interface{}
 }
 
-func Ajax(status int, message string, content string) (data AjaxResponseData) {
+func Ajax(status int, message string, content interface{}) (data AjaxResponseData) {
 	data.Status = status
 	data.Message = message
 	data.Content = content

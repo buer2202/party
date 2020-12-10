@@ -54,20 +54,20 @@ func (c *PartyController) Post() {
 	valid.Required(joinPeopleNum, "join_people_num")
 	valid.Required(canJoinDate, "can_join_date")
 	if valid.HasErrors() {
-		c.Data["json"] = common.Ajax(0, "请填写完整", "")
+		c.Data["json"] = common.Ajax(0, "请填写完整", nil)
 		c.ServeJSON()
 		c.StopRun()
 	}
 
 	party, err := (&models.Party{}).GetByUrlCode(c.Ctx.Input.Param(":urlCode"))
 	if err != nil {
-		c.Data["json"] = common.Ajax(0, "获取活动ID失败", "")
+		c.Data["json"] = common.Ajax(0, "获取活动ID失败", nil)
 		c.ServeJSON()
 		c.StopRun()
 	}
 
 	if party.ConfirmDesc != "" {
-		c.Data["json"] = common.Ajax(0, "该活动已停止报名", "")
+		c.Data["json"] = common.Ajax(0, "该活动已停止报名", nil)
 		c.ServeJSON()
 		c.StopRun()
 	}
@@ -79,10 +79,10 @@ func (c *PartyController) Post() {
 		canJoinDate,
 	)
 	if !rlst {
-		c.Data["json"] = common.Ajax(0, "数据写入失败", "")
+		c.Data["json"] = common.Ajax(0, "数据写入失败", nil)
 		c.ServeJSON()
 	}
 
-	c.Data["json"] = common.Ajax(1, "提交成功", "")
+	c.Data["json"] = common.Ajax(1, "提交成功", nil)
 	c.ServeJSON()
 }
