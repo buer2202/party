@@ -31,4 +31,5 @@ func init() {
 
 	// 聚会管理
 	beego.Router("/admin/party/create", &admin.PartyController{}, "get:Create")
+	beego.Router("/admin/party/store", &admin.PartyController{}, "post:Store")
 }

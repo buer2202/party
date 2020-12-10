@@ -20,12 +20,12 @@
 </div>
 <script>
     $('#submit').click(function () {
-        buer_post('{{ urlfor "AuthController.Login" }}', {
+        buer_post('{{ urlfor "home.AuthController.Login" }}', {
             account: $('#account').val(),
             password: $('#password').val()
         }, function (data, load) {
             if (data.Status) {
-                window.location.href = '{{ urlfor "UserController.Get" }}';
+                window.location.href = '{{ urlfor "admin.UserController.Get" }}';
             } else {
                 layer.close(load);
                 layer.msg(data.Message, {

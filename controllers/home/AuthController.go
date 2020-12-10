@@ -32,5 +32,5 @@ func (c *AuthController) Login() {
 func (c *AuthController) Logout() {
 	c.DestroySession()
 	c.Data["json"] = common.Ajax(1, "注销成功", "")
-	c.Redirect(beego.URLFor("AuthController.LoginForm"), 302)
+	c.Redirect(beego.URLFor("home.AuthController.LoginForm"), 302)
 }
