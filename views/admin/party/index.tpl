@@ -68,7 +68,9 @@
                     $this.parent().siblings('.weui-form-preview__bd').find('.confirm_desc').text(value);
                     $this.remove();
                 } else {
-                    layer.alert(data.Message, {icon: 5});
+                    layer.alert("登录失效！", {icon: 5}, function () {
+                        window.location.href = data.Content;
+                    })
                 }
             });
         });
@@ -80,7 +82,9 @@
             if (data.Status) {
                 window.location.href = data.Content;
             } else {
-                layer.msg(data.Message, {icon: 5});
+                layer.alert("登录失效！", {icon: 5}, function () {
+                    window.location.href = data.Content;
+                })
             }
         }, 'json');
     });
@@ -108,7 +112,9 @@
                 pwd.blur(); // 取消焦点
 
             } else {
-                layer.msg(data.Message, {icon: 5});
+                layer.alert("登录失效！", {icon: 5}, function () {
+                    window.location.href = data.Content;
+                })
             }
         }, 'json');
     });

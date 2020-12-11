@@ -19,7 +19,7 @@ func (c *PartyController) Get() {
 	if err != nil {
 		c.Abort("404")
 	}
-	members := (&models.Member{}).ByUserId(party.UserId)
+	members := (&models.Member{}).GetByUserId(party.UserId)
 	partyMemberDate := (&models.PartyMember{}).GetPartyDate(party.Id)
 
 	c.Data["urlCode"] = c.Ctx.Input.Param(":urlCode")

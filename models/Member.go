@@ -13,7 +13,7 @@ type Member struct {
 	UpdatedAt string
 }
 
-func (m *Member) ByUserId(userId int) (dataList []*Member) {
+func (m *Member) GetByUserId(userId int) (dataList []*Member) {
 	qs := orm.NewOrm().QueryTable(m)
 	_, err := qs.Filter("user_id", userId).All(&dataList)
 	if err != nil {

@@ -12,6 +12,8 @@ func init() {
 	beego.ErrorController(&controllers.ErrorController{})
 	// 测试页
 	beego.Router("/test", &controllers.TestController{})
+	// ajax响应
+	beego.Router("/ajax-auth", &controllers.AjaxAuthController{})
 
 	// 聚会主页
 	beego.Router("/party/:urlCode", &home.PartyController{})

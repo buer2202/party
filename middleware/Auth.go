@@ -10,7 +10,7 @@ import (
 func FilterGuest(ctx *context.Context) {
 	_, ok := ctx.Input.Session("authUser").(models.User)
 	if ok {
-		ctx.Redirect(302, beego.URLFor("admin.UserController.Get"))
+		ctx.Redirect(302, beego.URLFor("UserController.Get"))
 	}
 }
 
@@ -18,6 +18,11 @@ func FilterGuest(ctx *context.Context) {
 func FilterUser(ctx *context.Context) {
 	_, ok := ctx.Input.Session("authUser").(models.User)
 	if !ok {
-		ctx.Redirect(302, beego.URLFor("home.AuthController.LoginForm"))
+		// 判断是否为ajax请求
+		if ctx.Request.Header.Get("X-Requested-With") == "XMLHttpRequest" {
+			ctx.Redirect(302, beego.URLFor("AjaxAuthController.Get"))
+		} else {
+			ctx.Redirect(302, beego.URLFor("AuthController.LoginForm"))
+		}
 	}
 }
