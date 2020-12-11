@@ -34,5 +34,5 @@ func init() {
 	beego.Router("/admin/party/data-list", &admin.PartyController{}, "get:DataList")
 	beego.Router("/admin/party/create", &admin.PartyController{}, "get:Create")
 	beego.Router("/admin/party/store", &admin.PartyController{}, "post:Store")
-	beego.Router("/admin/party/:id/update", &admin.PartyController{}, "post:Update")
+	beego.Router("/admin/party/confirm", &admin.PartyController{}, "post:Confirm")
 }

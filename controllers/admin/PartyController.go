@@ -11,11 +11,13 @@ type PartyController struct {
 	beego.Controller
 }
 
+// 活动管理主页
 func (c *PartyController) Index() {
 	c.Layout = "layout.html"
 	c.TplName = "admin/party/index.tpl"
 }
 
+// 翻页数据
 func (c *PartyController) DataList() {
 	page, _ := c.GetInt64("p", 1)
 	dataList := (&models.Party{}).GetList(c.GetSession("authUser").(models.User).Id, page)
@@ -24,11 +26,13 @@ func (c *PartyController) DataList() {
 	c.ServeJSON()
 }
 
+// 创建页
 func (c *PartyController) Create() {
 	c.Layout = "layout.html"
 	c.TplName = "admin/party/create.tpl"
 }
 
+// 添加活动方法
 func (c *PartyController) Store() {
 	valid := validation.Validation{}
 	valid.Required(c.GetString("name"), "name")
@@ -39,8 +43,7 @@ func (c *PartyController) Store() {
 		c.StopRun()
 	}
 
-	userInfo := c.GetSession("authUser")
-	_, err := (&models.Party{}).Store(userInfo.(models.User).Id, c.GetString("name"), c.GetString("party_desc"))
+	_, err := (&models.Party{}).Store(c.GetSession("authUser").(models.User).Id, c.GetString("name"), c.GetString("party_desc"))
 	if err != nil {
 		c.Data["json"] = common.Ajax(0, "活动创建失败", nil)
 		c.ServeJSON()
@@ -51,7 +54,27 @@ func (c *PartyController) Store() {
 	c.ServeJSON()
 }
 
-func (c *PartyController) Update() {
-	c.Layout = "layout.html"
-	c.TplName = "admin/party/create.tpl"
+// 活动确认
+func (c *PartyController) Confirm() {
+	partyId, _ := c.GetInt("id")
+	confirmDesc := c.GetString("confirm_desc")
+
+	valid := validation.Validation{}
+	valid.Required(partyId, "id")
+	valid.Required(confirmDesc, "confirm_desc")
+	if valid.HasErrors() {
+		c.Data["json"] = common.Ajax(0, "参数错误", nil)
+		c.ServeJSON()
+		c.StopRun()
+	}
+
+	err := (&models.Party{}).Confirm(c.GetSession("authUser").(models.User).Id, partyId, confirmDesc)
+	if (err != nil) {
+		c.Data["json"] = common.Ajax(0, err.Error(), nil)
+		c.ServeJSON()
+		c.StopRun()
+	}
+
+	c.Data["json"] = common.Ajax(1, "操作成功", nil)
+	c.ServeJSON()
 }

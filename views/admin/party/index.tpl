@@ -19,26 +19,52 @@
             var html =  '<div class="weui-form-preview">'
                      +      '<div class="weui-form-preview__bd">'
                      +          '<div class="weui-form-preview__item">'
-                     +              '<label class="weui-form-preview__label">商品</label>'
-                     +              '<span class="weui-form-preview__value">电动打蛋机</span>'
+                     +              '<label class="weui-form-preview__label">活动题材</label>'
+                     +              '<span class="weui-form-preview__value">' + data.Name + '</span>'
                      +          '</div>'
                      +          '<div class="weui-form-preview__item">'
-                     +              '<label class="weui-form-preview__label">标题标题</label>'
-                     +              '<span class="weui-form-preview__value">名字名字名字</span>'
+                     +              '<label class="weui-form-preview__label">活动说明</label>'
+                     +              '<span class="weui-form-preview__value">' + data.PartyDesc + '</span>'
                      +          '</div>'
                      +          '<div class="weui-form-preview__item">'
-                     +              '<label class="weui-form-preview__label">标题标题</label>'
-                     +              '<span class="weui-form-preview__value">很长很长的名字很长很长的名字很长很长的名字很长很长的名字很长很长的名字</span>'
+                     +              '<label class="weui-form-preview__label">活动确认</label>'
+                     +              '<span class="weui-form-preview__value confirm_desc">' + data.ConfirmDesc + '</span>'
                      +          '</div>'
                      +      '</div>'
-                     +      '<div class="weui-form-preview__ft">'
-                     +          '<a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">最终确认</a>'
-                     +          '<button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary"'
-                     +              'href="javascript:">分享链接</button>'
+                     +      '<div class="weui-form-preview__ft">';
+
+            if (!data.ConfirmDesc) {
+                html +=         '<button class="weui-form-preview__btn weui-form-preview__btn_default party-confirm" data-id="' + data.Id + '">最终确认</button>';
+            }
+
+                html +=         '<button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary party-share" data-url_code="' + data.UrlCode + '">分享链接</button>'
                      +      '</div>'
-                     +  '</div>'
+                     +  '</div>';
 
             return html;
         }
+    });
+
+    // 活动确认
+    $('#data-list').on('click', '.party-confirm', function () {
+        var $this = $(this);
+
+        layer.prompt({title: '输入活动最终确认方案！', formType: 2}, function (value, index) {
+            layer.close(index);
+
+            buer_post('{{ urlfor "admin.PartyController.Confirm" }}', {
+                id: $this.data('id'),
+                confirm_desc: value
+            }, function (data, load) {
+                layer.close(load)
+                if (data.Status) {
+                    layer.msg(data.Message, {icon: 6});
+                    $this.parent().siblings('.weui-form-preview__bd').find('.confirm_desc').text(value);
+                    $this.remove();
+                } else {
+                    layer.alert(data.Message, {icon: 5});
+                }
+            });
+        });
     });
 </script>
