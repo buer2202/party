@@ -69,12 +69,28 @@ func (c *PartyController) Confirm() {
 	}
 
 	err := (&models.Party{}).Confirm(c.GetSession("authUser").(models.User).Id, partyId, confirmDesc)
-	if (err != nil) {
+	if err != nil {
 		c.Data["json"] = common.Ajax(0, err.Error(), nil)
 		c.ServeJSON()
 		c.StopRun()
 	}
 
 	c.Data["json"] = common.Ajax(1, "操作成功", nil)
+	c.ServeJSON()
+}
+
+// 分享活动链接
+func (c *PartyController) ShareUrl() {
+	valid := validation.Validation{}
+	valid.Required(c.GetString("url_code"), "url_code")
+	if valid.HasErrors() {
+		c.Data["json"] = common.Ajax(0, "参数错误", nil)
+		c.ServeJSON()
+		c.StopRun()
+	}
+
+	uri := beego.URLFor("home.PartyController.Get", ":urlCode", c.GetString("url_code"))
+	shareUrl := common.GetUrl(c.Ctx.Request, uri)
+	c.Data["json"] = common.Ajax(1, "操作成功", shareUrl)
 	c.ServeJSON()
 }

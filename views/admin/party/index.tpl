@@ -9,6 +9,12 @@
     <span class="weui-loadmore__tips">正在加载</span>
 </div>
 
+<div id="share-box" style="padding:30px 20px 0 20px">
+    <div>分享链接：</div>
+    <input type="text" id="share-url" style="width:100%;border:0;color:#01AAED;outline:none;" />
+    <div style="color:#5FB878;">（已自动复制）</div>
+</div>
+
 <script src="/static/js/buer_page.js"></script>
 <script>
     // 滚动加载
@@ -66,5 +72,33 @@
                 }
             });
         });
+    });
+
+    // 分享链接
+    $('#data-list').on('click', '.party-share', function () {
+        $.get('{{ urlfor "admin.PartyController.ShareUrl" }}' + '?url_code=' + $(this).data('url_code'), function (data) {
+            if (data.Status) {
+                layer.open({
+                    type: 1,
+                    shade: 0.3,
+                    title: false,
+                    area: ["90%", "150px"],
+                    shadeClose: true,
+                    content: $('#share-box')
+                });
+
+                // 赋值
+                var $urlBox = $('#share-url');
+                $urlBox.val(data.Content);
+
+                var pwd = $urlBox[0];
+                pwd.select(); // 选择对象
+                document.execCommand("Copy"); // 执行浏览器复制命令
+                pwd.blur(); // 取消焦点
+
+            } else {
+                layer.msg(data.Message, {icon: 5});
+            }
+        }, 'json');
     });
 </script>
