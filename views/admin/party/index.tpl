@@ -9,7 +9,7 @@
     <span class="weui-loadmore__tips">正在加载</span>
 </div>
 
-<div id="share-box" style="padding:30px 20px 0 20px">
+<div id="share-box" style="padding:30px 20px 0 20px;display:none;">
     <div>分享链接：</div>
     <input type="text" id="share-url" style="width:100%;border:0;color:#01AAED;outline:none;" />
     <div style="color:#5FB878;">（已自动复制）</div>
@@ -37,13 +37,13 @@
                      +              '<span class="weui-form-preview__value confirm_desc">' + data.ConfirmDesc + '</span>'
                      +          '</div>'
                      +      '</div>'
-                     +      '<div class="weui-form-preview__ft">';
-
+                     +      '<div class="weui-form-preview__ft">'
+                     +          '<button class="weui-form-preview__btn weui-form-preview__btn_primary party-redirect" data-url_code="' + data.UrlCode + '">查看</button>';
             if (!data.ConfirmDesc) {
-                html +=         '<button class="weui-form-preview__btn weui-form-preview__btn_default party-confirm" data-id="' + data.Id + '">最终确认</button>';
+                html +=         '<button class="weui-form-preview__btn weui-form-preview__btn_default party-confirm" data-id="' + data.Id + '">确认</button>';
             }
 
-                html +=         '<button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary party-share" data-url_code="' + data.UrlCode + '">分享链接</button>'
+                html +=         '<button class="weui-form-preview__btn weui-form-preview__btn_primary party-share" data-url_code="' + data.UrlCode + '">分享</button>'
                      +      '</div>'
                      +  '</div>';
 
@@ -72,6 +72,17 @@
                 }
             });
         });
+    });
+
+    // 查看活动
+    $('#data-list').on('click', '.party-redirect', function () {
+        $.get('{{ urlfor "admin.PartyController.ShareUrl" }}' + '?url_code=' + $(this).data('url_code'), function (data) {
+            if (data.Status) {
+                window.location.href = data.Content;
+            } else {
+                layer.msg(data.Message, {icon: 5});
+            }
+        }, 'json');
     });
 
     // 分享链接

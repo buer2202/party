@@ -36,4 +36,7 @@ func init() {
 	beego.Router("/admin/party/store", &admin.PartyController{}, "post:Store")
 	beego.Router("/admin/party/confirm", &admin.PartyController{}, "post:Confirm")
 	beego.Router("/admin/party/share-url", &admin.PartyController{}, "get:ShareUrl")
+
+	// 人员管理
+	beego.Router("admin/member/index", &admin.MemberController{})
 }
