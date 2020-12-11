@@ -1,3 +1,4 @@
+<a href="{{ urlfor `admin.UserController.Get` }}" class="href-back">&lt;<i class="weui-icon-circle"></i></a>
 <div class="title">活动管理</div>
 <div class="weui-btn-area">
     <a href="{{ urlfor `admin.PartyController.Create` }}" class="weui-btn weui-btn_plain-primary" id="submit">新建活动</a>

@@ -8,7 +8,7 @@
             活动管理
         </p>
     </a>
-    <a href="" class="weui-grid js_grid">
+    <a href="{{ urlfor `admin.MemberController.Index` }}" class="weui-grid js_grid">
         <div class="weui-grid__icon">
             <img src="/static/img/icon_nav_article.png" alt="">
         </div>

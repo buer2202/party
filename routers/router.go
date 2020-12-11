@@ -32,7 +32,7 @@ func init() {
 	beego.Router("/admin/user", &admin.UserController{})
 
 	// 聚会管理
-	beego.Router("/admin/party/index", &admin.PartyController{}, "get:Index")
+	beego.Router("/admin/party", &admin.PartyController{}, "get:Index")
 	beego.Router("/admin/party/data-list", &admin.PartyController{}, "get:DataList")
 	beego.Router("/admin/party/create", &admin.PartyController{}, "get:Create")
 	beego.Router("/admin/party/store", &admin.PartyController{}, "post:Store")
@@ -40,5 +40,8 @@ func init() {
 	beego.Router("/admin/party/share-url", &admin.PartyController{}, "get:ShareUrl")
 
 	// 人员管理
-	beego.Router("admin/member/index", &admin.MemberController{})
+	beego.Router("admin/member", &admin.MemberController{}, "get:Index")
+	beego.Router("admin/member/store", &admin.MemberController{}, "post:Store")
+	beego.Router("admin/member/update", &admin.MemberController{}, "post:Update")
+	beego.Router("admin/member/destroy", &admin.MemberController{}, "post:Destroy")
 }

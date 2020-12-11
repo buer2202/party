@@ -4,6 +4,7 @@ html {
     -webkit-tap-highlight-color: transparent;
     background-color: #fbfbfb;
 }
+
 table {
     border-spacing: 0;
     border-collapse: collapse;
@@ -12,6 +13,13 @@ table {
 .logo {
     text-align: center;
     margin-top: 10px;
+}
+
+.href-back {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    color: #cccccc;
 }
 
 .title {
@@ -31,12 +39,16 @@ table {
 .my-table {
     width: 100%;
 }
-.my-table, .my-table td {
+
+.my-table,
+.my-table td {
     border: 1px solid #ddd;
 }
+
 .my-table td {
     text-align: center;
 }
+
 .my-table td.can-join {
     color: #fff;
     background-color: #3cc51f;
@@ -51,6 +63,7 @@ table {
     text-align: center;
     padding: 50px 0 10px 0;
 }
+
 .user-center {
     color: #01AAED;
 }
