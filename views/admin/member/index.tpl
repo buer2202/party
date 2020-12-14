@@ -1,7 +1,7 @@
 <a href="{{ urlfor `admin.UserController.Get` }}" class="href-back">&lt;<i class="weui-icon-circle"></i></a>
 <div class="title">成员管理</div>
 <div class="weui-btn-area">
-    <a href="{{ urlfor `admin.PartyController.Create` }}" class="weui-btn weui-btn_plain-primary" id="submit">新建成员</a>
+    <button class="weui-btn weui-btn_plain-primary" id="add">新建成员</button>
 </div>
 
 <div class="weui-cells">
@@ -14,8 +14,10 @@
             </div>
         </div>
         <div class="weui-cell__ft">
-            <span class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">删除</span>
-            <span class="weui-swiped-btn weui-swiped-btn_default close-swipeout" href="javascript:">编辑</span>
+            <span class="weui-swiped-btn weui-swiped-btn_default edit"
+                data-url="{{ urlfor `admin.MemberController.Update` `:id` .Id }}" data-nickname="{{ .Nickname }}">编辑</span>
+            <span class="weui-swiped-btn weui-swiped-btn_warn destroy"
+                data-url="{{ urlfor `admin.MemberController.Destroy` `:id` .Id }}">删除</span>
         </div>
     </div>
     {{end}}
@@ -23,4 +25,68 @@
 
 <script>
     $('.weui-cell_swiped').swipeout()
+
+    // 添加
+    $('#add').click(function () {
+        layer.prompt({
+            formType: 0,
+            title: '添加新成员'
+        }, function (value, index, elem) {
+            layer.close(index);
+            buer_post('{{ urlfor "admin.MemberController.Store" }}', {nickname: value}, function (data, load) {
+                layer.close(load)
+                if (data.Status) {
+                    layer.alert('操作成功', {icon: 6}, function () {
+                        window.location.reload();
+                    });
+                } else {
+                    if (data.Content) {
+                        layer.alert("登录失效！", {icon: 5}, function () {
+                            window.location.href = data.Content;
+                        });
+                    } else {
+                        layer.alert(data.Message);
+                    }
+                }
+            });
+        });
+    });
+
+    // 编辑
+    $('.edit').click(function () {
+        var url = $(this).data('url');
+
+        layer.prompt({
+            formType: 0,
+            value: $(this).data('nickname'),
+            title: '修改成员'
+        }, function (value, index, elem) {
+            layer.close(index);
+            buer_post(url, {nickname: value}, function (data, load) {
+                layer.close(load)
+                if (data.Status) {
+                    layer.alert('操作成功', {icon: 6}, function () {
+                        window.location.reload();
+                    });
+                } else {
+                    if (data.Content) {
+                        layer.alert("登录失效！", {icon: 5}, function () {
+                            window.location.href = data.Content;
+                        });
+                    } else {
+                        layer.alert(data.Message);
+                    }
+                }
+            });
+        });
+    });
+
+    // 删除
+    $('.destroy').click(function () {
+        var url = $(this).data('url');
+
+        layer.confirm("确定删除吗？", function () {
+            buer_post(url);
+        });
+    });
 </script>

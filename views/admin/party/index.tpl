@@ -71,7 +71,7 @@
                 } else {
                     layer.alert("登录失效！", {icon: 5}, function () {
                         window.location.href = data.Content;
-                    })
+                    });
                 }
             });
         });
@@ -85,7 +85,7 @@
             } else {
                 layer.alert("登录失效！", {icon: 5}, function () {
                     window.location.href = data.Content;
-                })
+                });
             }
         }, 'json');
     });
@@ -115,7 +115,7 @@
             } else {
                 layer.alert("登录失效！", {icon: 5}, function () {
                     window.location.href = data.Content;
-                })
+                });
             }
         }, 'json');
     });

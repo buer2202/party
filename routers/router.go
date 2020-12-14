@@ -42,6 +42,6 @@ func init() {
 	// 人员管理
 	beego.Router("admin/member", &admin.MemberController{}, "get:Index")
 	beego.Router("admin/member/store", &admin.MemberController{}, "post:Store")
-	beego.Router("admin/member/update", &admin.MemberController{}, "post:Update")
-	beego.Router("admin/member/destroy", &admin.MemberController{}, "post:Destroy")
+	beego.Router("admin/member/:id/update", &admin.MemberController{}, "post:Update")
+	beego.Router("admin/member/:id/destroy", &admin.MemberController{}, "post:Destroy")
 }

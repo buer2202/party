@@ -27,7 +27,7 @@ func (m *Member) GetByUserId(userId int) (dataList []*Member) {
 	return
 }
 
-func (m *Member) Store(userId int, nickname string) (id int64, err error) {
+func (m *Member) Create(userId int, nickname string) (id int64, err error) {
 	// 构造数据
 	now := time.Now().Format("2006-01-02 15:04:05")
 
@@ -42,7 +42,7 @@ func (m *Member) Store(userId int, nickname string) (id int64, err error) {
 }
 
 func (m *Member) Update(userId int, id int, nickname string) error {
-	var model Party
+	var model Member
 	qs := orm.NewOrm().QueryTable(m)
 	err1 := qs.Filter("id", id).Filter("user_id", userId).One(&model)
 	if err1 != nil {
@@ -55,6 +55,22 @@ func (m *Member) Update(userId int, id int, nickname string) error {
 	})
 	if num == 0 || err2 != nil {
 		return errors.New("数据更新失败")
+	}
+
+	return nil
+}
+
+func (m *Member) Delete(userId int, id int) error {
+	var model Member
+	qs := orm.NewOrm().QueryTable(m)
+	err1 := qs.Filter("id", id).Filter("user_id", userId).One(&model)
+	if err1 != nil {
+		return errors.New("该成员不存在")
+	}
+
+	num, err2 := qs.Filter("id", id).Delete()
+	if num == 0 || err2 != nil {
+		return errors.New("数据删除失败")
 	}
 
 	return nil
