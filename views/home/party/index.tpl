@@ -5,7 +5,7 @@
 
 <div class="section" style="margin-top: 0;">
     <img src="/static/img/party-desc.png" style="position:relative;top:10px;">
-    描述：
+    活动描述：
 </div>
 <div class="weui-cells__tips">{{ .party.PartyDesc }}</div>
 
@@ -17,8 +17,8 @@
     <div class="confirm-desc">{{ .party.ConfirmDesc }}</div>
 {{ else }}
     <div class="section">
-        <img src="/static/img/joined-form.png" style="position:relative;top:10px;">
-        报名：
+        <img src="/static/img/join-form.png" style="position:relative;top:10px;">
+        开始报名：<span class="weui-cells__tips">（重复报名会覆盖前一次）</span>
     </div>
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell weui-cell_select weui-cell_select-after">
@@ -61,7 +61,7 @@
     <div class="weui-btn-area">
         <button class="weui-btn weui-btn_plain-primary" id="submit">
             <img src="/static/img/join.png" style="position:relative;top:10px;">
-            我要报名
+            立即报名
         </button>
     </div>
 {{ end }}
@@ -72,7 +72,7 @@
 </div>
 <table class="my-table">
     <tr>
-        <td width="100">日期\人员</td>
+        <td width="100"><img src="/static/img/joined-table.png"></td>
         {{ range .joinedMembers}}
         <td>{{ .MemberNickname }}</td>
         {{ end }}
