@@ -34,7 +34,7 @@ func (m *Party) GetList(userId int, pageNo int64) common.Page {
 	}
 
 	var dataList []*Party
-	_, err1 := qs.Filter("user_id", userId).Limit(pageSize, offset).All(&dataList)
+	_, err1 := qs.Filter("user_id", userId).OrderBy("-id").Limit(pageSize, offset).All(&dataList)
 	if err1 != nil {
 		common.MyLog("db_err", err1.Error())
 		return common.Page{}
