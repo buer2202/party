@@ -1,12 +1,25 @@
-<h1 class="title">{{ .party.Name }}</h1>
+<h1 class="title">
+    <img src="/static/img/share.png" style="position:relative;top:10px;">
+    {{ .party.Name }}
+</h1>
 
-<div class="section">当前活动：</div>
+<div class="section" style="margin-top: 0;">
+    <img src="/static/img/party-desc.png" style="position:relative;top:10px;">
+    描述：
+</div>
 <div class="weui-cells__tips">{{ .party.PartyDesc }}</div>
 
 {{ if .party.ConfirmDesc }}
-    <div class="section">确认方案：</div>
+    <div class="section">
+        <img src="/static/img/confirm-desc.png" style="position:relative;top:10px;">
+        确认方案：
+    </div>
     <div class="confirm-desc">{{ .party.ConfirmDesc }}</div>
 {{ else }}
+    <div class="section">
+        <img src="/static/img/joined-form.png" style="position:relative;top:10px;">
+        报名：
+    </div>
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell weui-cell_select weui-cell_select-after">
             <div class="weui-cell__hd">
@@ -46,11 +59,17 @@
     <div id="inline-calendar"></div>
 
     <div class="weui-btn-area">
-        <button class="weui-btn weui-btn_primary" id="submit">提交</button>
+        <button class="weui-btn weui-btn_plain-primary" id="submit">
+            <img src="/static/img/join.png" style="position:relative;top:10px;">
+            我要报名
+        </button>
     </div>
 {{ end }}
 
-<div class="section">报名情况：</div>
+<div class="section">
+    <img src="/static/img/joined.png" style="position:relative;top:10px;">
+    报名情况：
+</div>
 <table class="my-table">
     <tr>
         <td width="100">日期\人员</td>
