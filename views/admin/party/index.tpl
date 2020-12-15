@@ -4,7 +4,7 @@
 </div>
 <div class="weui-btn-area">
     <a href="{{ urlfor `admin.PartyController.Create` }}" class="weui-btn weui-btn_plain-primary" id="submit">
-        <img style="position:relative;top:8px;right:5px;" src="/static/img/submit.png" />
+        <img style="position:relative;top:8px;right:5px;" src="/static/img/new-party.png" />
         新建活动
     </a>
 </div>
@@ -21,7 +21,7 @@
         分享链接：
     </div>
     <input type="text" id="share-url" style="width:100%;border:0;color:#01AAED;outline:none;" />
-    <div style="color:#5FB878;">（已自动复制）</div>
+    <div style="color:#5FB878;">（已复制，可直接去微信群粘贴啦！）</div>
 </div>
 
 <script src="/static/js/buer_page.js"></script>

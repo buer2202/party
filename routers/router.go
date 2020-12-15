@@ -26,6 +26,8 @@ func init() {
 	beego.Router("/", &home.AuthController{}, "get:LoginForm")
 	beego.Router("/login", &home.AuthController{}, "post:Login")
 	beego.Router("/logout", &home.AuthController{}, "post:Logout")
+	beego.Router("/register", &home.AuthController{}, "get:Register")
+	beego.Router("/regist", &home.AuthController{}, "post:Regist")
 
 	// 用户前台
 	// 导航页
