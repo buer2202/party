@@ -16,6 +16,12 @@ type Member struct {
 	UpdatedAt string
 }
 
+func (m *Member) GetById(id int) (data Member, err error) {
+	qs := orm.NewOrm().QueryTable(m)
+	err = qs.Filter("id", id).One(&data)
+	return
+}
+
 func (m *Member) GetByUserId(userId int) (dataList []*Member) {
 	qs := orm.NewOrm().QueryTable(m)
 	_, err := qs.Filter("user_id", userId).OrderBy("nickname").All(&dataList)

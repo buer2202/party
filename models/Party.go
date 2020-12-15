@@ -47,10 +47,6 @@ func (m *Party) GetList(userId int, pageNo int64) common.Page {
 func (m *Party) GetByUrlCode(urlCode string) (data Party, err error) {
 	qs := orm.NewOrm().QueryTable(m)
 	err = qs.Filter("url_code", urlCode).One(&data)
-	if err != nil {
-		common.MyLog("db_err", err.Error())
-	}
-
 	return
 }
 

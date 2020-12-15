@@ -19,12 +19,14 @@ func (c *PartyController) Get() {
 	if err != nil {
 		c.Abort("404")
 	}
-	members := (&models.Member{}).GetByUserId(party.UserId)
+	allMembers := (&models.Member{}).GetByUserId(party.UserId)
+	joinedMembers := (&models.PartyMember{}).GetJoinedMember(party.Id)
 	partyMemberDate := (&models.PartyMember{}).GetPartyDate(party.Id)
 
 	c.Data["urlCode"] = c.Ctx.Input.Param(":urlCode")
 	c.Data["party"] = party
-	c.Data["members"] = members
+	c.Data["allMembers"] = allMembers
+	c.Data["joinedMembers"] = joinedMembers
 	c.Data["partyMemberDate"] = partyMemberDate
 
 	c.Layout = "layout.html"
@@ -78,7 +80,7 @@ func (c *PartyController) Post() {
 		joinPeopleNum,
 		canJoinDate,
 	)
-	if !rlst {
+	if rlst != nil {
 		c.Data["json"] = common.Ajax(0, "数据写入失败", nil)
 		c.ServeJSON()
 	}

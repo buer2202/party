@@ -15,7 +15,7 @@
             <div class="weui-cell__bd">
                 <select class="weui-select" id="member_id">
                     <option value="">请选择</option>
-                    {{ range .members }}
+                    {{ range .allMembers }}
                     <option value="{{ .Id }}">{{ .Nickname }}</option>
                     {{ end }}
                 </select>
@@ -54,15 +54,15 @@
 <table class="my-table">
     <tr>
         <td>日期\人员</td>
-        {{ range .members}}
-        <td>{{ .Nickname }}</td>
+        {{ range .joinedMembers}}
+        <td>{{ .MemberNickname }}</td>
         {{ end }}
     </tr>
     {{ range $k, $date := .partyMemberDate }}
     <tr>
         <td>{{ $date.CanJoinDate }}</td>
-        {{ range $.members}}
-        <td class="join-show {{ .Id }}-{{ $date.CanJoinDate }}"></td>
+        {{ range $.joinedMembers}}
+        <td class="join-show {{ .MemberNickname }}-{{ $date.CanJoinDate }}"></td>
         {{ end }}
     </tr>
     {{ end }}
@@ -89,7 +89,7 @@
         if (data) {
             var tdClassName;
             for (const i in data) {
-                tdClassName = '.' + data[i].MemberId + '-' + data[i].CanJoinDate;
+                tdClassName = '.' + data[i].MemberNickname + '-' + data[i].CanJoinDate;
                 $(tdClassName).addClass('can-join').text(data[i].JoinPeopleNum);
             }
         }
