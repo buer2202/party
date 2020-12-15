@@ -33,7 +33,9 @@
             party_desc: $('#party_desc').val()
         }, function (data, load) {
             if (data.Status) {
-                layer.alert("ok");
+                layer.alert("创建成功！", function () {
+                    window.location.href = '{{ urlfor "admin.PartyController.Index" }}';
+                });
             } else {
                 layer.close(load);
                 layer.msg(data.Message, {

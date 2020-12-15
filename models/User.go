@@ -44,7 +44,7 @@ func (m *User) Regist(account string, password string, nickname string) (data Us
 
 	var model User
 	model.Account = account
-	model.Password = password
+	model.Password = common.HashSha256(password)
 	model.Nickname = nickname
 	model.CreatedAt = now
 	model.UpdatedAt = now
