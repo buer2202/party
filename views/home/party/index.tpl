@@ -53,7 +53,7 @@
 <div class="section">报名情况：</div>
 <table class="my-table">
     <tr>
-        <td>日期\人员</td>
+        <td width="100">日期\人员</td>
         {{ range .joinedMembers}}
         <td>{{ .MemberNickname }}</td>
         {{ end }}

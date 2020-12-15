@@ -1,4 +1,7 @@
-<div class="title">新建活动</div>
+<div class="title">
+    <img src="/static/img/new-party.png" style="position:relative;top:6px;">
+    新建活动
+</div>
 
 <div class="weui-cells__title">活动题材</div>
 <div class="weui-cells">
@@ -18,7 +21,10 @@
     </div>
 </div>
 <div class="weui-btn-area">
-    <button class="weui-btn weui-btn_primary" id="submit">提交</button>
+    <button class="weui-btn weui-btn_plain-primary" id="submit">
+        <img style="position:relative;top:8px;right:5px;" src="/static/img/submit.png" />
+        提交
+    </button>
 </div>
 <script>
     $('#submit').click(function () {

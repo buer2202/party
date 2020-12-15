@@ -1,7 +1,12 @@
-<a href="{{ urlfor `admin.UserController.Get` }}" class="href-back">&lt;<i class="weui-icon-circle"></i></a>
-<div class="title">成员管理</div>
+<div class="title">
+    <img src="/static/img/members.png" style="position:relative;top:5px;">
+    成员管理
+</div>
 <div class="weui-btn-area">
-    <button class="weui-btn weui-btn_plain-primary" id="add">新建成员</button>
+    <button class="weui-btn weui-btn_plain-primary" id="add">
+        <img style="position:relative;top:8px;right:5px;" src="/static/img/submit.png" />
+        新建成员
+    </button>
 </div>
 
 <div class="weui-cells">
@@ -9,7 +14,10 @@
     <div class="weui-cell weui-cell_swiped">
         <div class="weui-cell__bd">
             <div class="weui-cell">
-                <div class="weui-cell__bd">{{ .Nickname }}</div>
+                <div class="weui-cell__bd">
+                    <img src="/static/img/member.png" class="member-icon">
+                    {{ .Nickname }}
+                </div>
                 <div class="weui-cell__ft">左滑管理</div>
             </div>
         </div>

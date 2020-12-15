@@ -10,16 +10,20 @@ table {
     border-collapse: collapse;
 }
 
+.weui-grid__icon img {
+    width: auto;
+    height: auto;
+}
+
 .logo {
     text-align: center;
     margin-top: 10px;
 }
 
-.href-back {
+.href-home {
     position: absolute;
-    top: 2px;
-    left: 2px;
-    color: #cccccc;
+    top: 1px;
+    right: 5px;
 }
 
 .title {
@@ -66,4 +70,9 @@ table {
 
 .user-center {
     color: #01AAED;
+}
+
+.member-icon {
+    position: relative;
+    top: 8px;
 }

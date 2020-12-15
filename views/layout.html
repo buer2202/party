@@ -16,10 +16,17 @@
 </head>
 
 <body>
+    <a href="{{ urlfor `admin.UserController.Get` }}" class="href-home">
+        <img src="/static/img/home.png" />
+    </a>
+
     {{.LayoutContent}}
 
     <div class="footer">
-        <a class="user-center" href="{{ urlfor `admin.UserController.Get` }}">用户中心</a>
+        <a class="user-center" href="{{ urlfor `admin.UserController.Get` }}">
+            <img style="position:relative;top:8px;right:5px;" src="/static/img/home.png" />
+            用户中心
+        </a>
         <div class="weui-msg__desc">Power by Buer 2020.11</div>
     </div>
 </body>
