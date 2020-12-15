@@ -79,7 +79,7 @@
     </tr>
     {{ range $k, $date := .partyMemberDate }}
     <tr>
-        <td>{{ $date.CanJoinDate }}</td>
+        <td>{{ substr $date.CanJoinDate 5 5 }}</td>
         {{ range $.joinedMembers}}
         <td class="join-show {{ .MemberNickname }}-{{ $date.CanJoinDate }}"></td>
         {{ end }}
