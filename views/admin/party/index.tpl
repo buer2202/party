@@ -15,8 +15,11 @@
     <span class="weui-loadmore__tips">正在加载</span>
 </div>
 
-<div id="share-box" style="padding:30px 20px 0 20px;display:none;">
-    <div>分享链接：</div>
+<div id="share-box" style="padding:20px;display:none;">
+    <div>
+        <img src="/static/img/share.png" style="position:relative;top:10px;">
+        分享链接：
+    </div>
     <input type="text" id="share-url" style="width:100%;border:0;color:#01AAED;outline:none;" />
     <div style="color:#5FB878;">（已自动复制）</div>
 </div>

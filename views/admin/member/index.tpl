@@ -15,10 +15,13 @@
         <div class="weui-cell__bd">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <img src="/static/img/member.png" class="member-icon">
-                    {{ .Nickname }}
+                    <img src="/static/img/member.png" class="member-left-icon">
+                    <span class="member-name">{{ .Nickname }}</span>
                 </div>
-                <div class="weui-cell__ft">左滑管理</div>
+                <div class="weui-cell__ft">
+                    <img src="/static/img/member-right.png" class="member-right-icon">
+                    左滑管理
+                </div>
             </div>
         </div>
         <div class="weui-cell__ft">

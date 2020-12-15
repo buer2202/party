@@ -1,5 +1,5 @@
 <div class="title">
-    <img style="position:relative;top:8px;right:5px;" src="/static/img/home.png" />
+    <img style="position:relative;top:8px;right:5px;" src="/static/img/user-center.png" />
     {{ .authUser.Nickname }}，你好！
 </div>
 <div class="weui-grids">

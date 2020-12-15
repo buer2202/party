@@ -1,4 +1,7 @@
-<h1 class="title">用户登录</h1>
+<h1 class="title">
+    <img style="position:relative;top:8px;right:5px;" src="/static/img/login-form.png" />
+    用户登录
+</h1>
 
 <div class="weui-cells weui-cells_form">
     <div class="weui-cell">
@@ -16,7 +19,10 @@
 </div>
 
 <div class="weui-btn-area">
-    <button class="weui-btn weui-btn_primary" type="button" id="submit">登录</button>
+    <button class="weui-btn weui-btn_plain-primary" type="button" id="submit">
+        <img style="position:relative;top:8px;right:5px;" src="/static/img/submit.png" />
+        登录
+    </button>
 </div>
 <script>
     $('#submit').click(function () {
