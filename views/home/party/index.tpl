@@ -14,7 +14,42 @@
         <img src="/static/img/confirm-desc.png" style="position:relative;top:10px;">
         确认方案：
     </div>
-    <div class="confirm-desc">{{ .party.ConfirmDesc }}</div>
+
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=1.0&type=webgl&ak=CC1448ce94eb75c90d9c2192d2a9a42f"></script>
+    <div id="container" style="height:250px;width:100%;"></div>
+    <script type="text/javascript">
+        var map = new BMapGL.Map("container");
+
+        //智能搜索
+        var local = new BMapGL.LocalSearch(map, {
+            onSearchComplete: function () {
+                //获取第一个智能搜索的结果
+                var pp = local.getResults().getPoi(0).point;
+                // console.log('经度：'+pp.lng, '纬度：'+pp.lat);
+
+                // 定位
+                map.centerAndZoom(pp, 18);
+                //添加标注
+                var myIcon = new BMapGL.Icon("/static/favicon.ico", new BMapGL.Size(30, 30));
+                var myMarker = new BMapGL.Marker(pp, {icon: myIcon});
+                map.addOverlay(myMarker);
+
+                // 添加说明窗口
+                var opts = {
+                    width: 200,
+                    height: 100,
+                    title: '艳阳天酒店(后湖店)'
+                };
+                var infoWindow = new BMapGL.InfoWindow('{{ .party.ConfirmDesc }}', opts);
+                map.openInfoWindow(infoWindow, pp);
+                myMarker.addEventListener('click', function () {
+                    map.openInfoWindow(infoWindow, pp);
+                });
+            }
+        });
+        local.search("艳阳天酒店(后湖店)");
+    </script>
+
 {{ else }}
     <div class="section">
         <img src="/static/img/join-form.png" style="position:relative;top:10px;">
