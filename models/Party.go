@@ -10,14 +10,15 @@ import (
 
 // Party Model
 type Party struct {
-	Id          int
-	UserId      int
-	UrlCode     string
-	Name        string
-	PartyDesc   string
-	ConfirmDesc string
-	CreatedAt   string
-	UpdatedAt   string
+	Id              int
+	UserId          int
+	UrlCode         string
+	Name            string
+	PartyDesc       string
+	ConfirmLocation string
+	ConfirmDesc     string
+	CreatedAt       string
+	UpdatedAt       string
 }
 
 func (m *Party) GetList(userId int, pageNo int64) common.Page {
@@ -68,7 +69,7 @@ func (m *Party) Store(userId int, name string, partyDesc string) (id int64, err 
 }
 
 // 活动确认
-func (m *Party) Confirm(userId int, id int, confirmDesc string) error {
+func (m *Party) Confirm(userId int, id int, confirmLocation string, confirmDesc string) error {
 	var model Party
 	qs := orm.NewOrm().QueryTable(m)
 	err1 := qs.Filter("id", id).Filter("user_id", userId).One(&model)
@@ -77,13 +78,14 @@ func (m *Party) Confirm(userId int, id int, confirmDesc string) error {
 	}
 
 	// 流程控制
-	if model.ConfirmDesc != "" {
+	if model.ConfirmLocation != "" {
 		return errors.New("该活动已确认过")
 	}
 
 	num, err2 := qs.Filter("id", id).Update(orm.Params{
-		"confirm_desc": confirmDesc,
-		"updated_at":   time.Now().Format("2006-01-02 15:04:05"),
+		"confirm_location": confirmLocation,
+		"confirm_desc":     confirmDesc,
+		"updated_at":       time.Now().Format("2006-01-02 15:04:05"),
 	})
 	if num == 0 || err2 != nil {
 		return errors.New("数据更新失败")

@@ -24,6 +24,32 @@
     <div style="color:#5FB878;">（已复制，可直接去微信群粘贴啦！）</div>
 </div>
 
+<div id="confirm-window" style="display:none;">
+    <div class="weui-cells__title">举办地点</div>
+    <div class="weui-cells">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <input id="confirm_location" class="weui-input" type="text" placeholder="请输入地点名，如：艳阳天酒店(后湖店)" autocomplete="off">
+            </div>
+        </div>
+    </div>
+
+    <div class="weui-cells__title">具体描述</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea id="confirm_desc" class="weui-textarea" placeholder="请填写举办时间、详细地址、推荐交通工具等信息。" rows="8"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="weui-btn-area">
+        <button class="weui-btn weui-btn_plain-primary" id="submit-confirm">
+            <img style="position:relative;top:8px;right:5px;" src="/static/img/submit.png" />
+            提交
+        </button>
+    </div>
+</div>
+
 <script src="/static/js/buer_page.js"></script>
 <script>
     // 滚动加载
@@ -42,7 +68,11 @@
                      +              '<span class="weui-form-preview__value">' + data.PartyDesc + '</span>'
                      +          '</div>'
                      +          '<div class="weui-form-preview__item">'
-                     +              '<label class="weui-form-preview__label">活动确认</label>'
+                     +              '<label class="weui-form-preview__label">举办地点</label>'
+                     +              '<span class="weui-form-preview__value confirm_location">' + data.ConfirmLocation + '</span>'
+                     +          '</div>'
+                     +          '<div class="weui-form-preview__item">'
+                     +              '<label class="weui-form-preview__label">具体描述</label>'
                      +              '<span class="weui-form-preview__value confirm_desc">' + data.ConfirmDesc + '</span>'
                      +          '</div>'
                      +      '</div>'
@@ -61,27 +91,37 @@
     });
 
     // 活动确认
+    var $confirmButton;
     $('#data-list').on('click', '.party-confirm', function () {
-        var $this = $(this);
+        $confirmButton = $(this);
 
-        layer.prompt({title: '输入活动最终确认方案！', formType: 2}, function (value, index) {
-            layer.close(index);
+        layer.open({
+            type: 1,
+            shade: 0.3,
+            title: "活动确认",
+            area: ['90%', '480px'],
+            content: $('#confirm-window')
+        });
+    });
 
-            buer_post('{{ urlfor "admin.PartyController.Confirm" }}', {
-                id: $this.data('id'),
-                confirm_desc: value
-            }, function (data, load) {
-                layer.close(load)
-                if (data.Status) {
-                    layer.msg(data.Message, {icon: 6});
-                    $this.parent().siblings('.weui-form-preview__bd').find('.confirm_desc').text(value);
-                    $this.remove();
-                } else {
-                    layer.alert("登录失效！", {icon: 5}, function () {
-                        window.location.href = data.Content;
-                    });
-                }
-            });
+    // 提交确认
+    $('#submit-confirm').click(function () {
+        buer_post('{{ urlfor "admin.PartyController.Confirm" }}', {
+            id: $confirmButton.data('id'),
+            confirm_location: $('#confirm_location').val(),
+            confirm_desc: $('#confirm_desc').val()
+        }, function (data, load) {
+            layer.closeAll();
+            if (data.Status) {
+                layer.msg(data.Message, {icon: 6});
+                $confirmButton.parent().siblings('.weui-form-preview__bd').find('.confirm_location').text($('#confirm_location').val());
+                $confirmButton.parent().siblings('.weui-form-preview__bd').find('.confirm_desc').text($('#confirm_desc').val());
+                $confirmButton.remove();
+            } else {
+                layer.alert("登录失效！", {icon: 5}, function () {
+                    window.location.href = data.Content;
+                });
+            }
         });
     });
 

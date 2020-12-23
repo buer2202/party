@@ -9,7 +9,7 @@
 </div>
 <div class="weui-cells__tips">{{ .party.PartyDesc }}</div>
 
-{{ if .party.ConfirmDesc }}
+{{ if .party.ConfirmLocation }}
     <div class="section">
         <img src="/static/img/confirm-desc.png" style="position:relative;top:10px;">
         确认方案：
@@ -38,7 +38,7 @@
                 var opts = {
                     width: 200,
                     height: 100,
-                    title: '艳阳天酒店(后湖店)'
+                    title: '{{ .party.ConfirmLocation }}'
                 };
                 var infoWindow = new BMapGL.InfoWindow('{{ .party.ConfirmDesc }}', opts);
                 map.openInfoWindow(infoWindow, pp);
@@ -47,7 +47,7 @@
                 });
             }
         });
-        local.search("艳阳天酒店(后湖店)");
+        local.search("{{ .party.ConfirmLocation }}");
     </script>
 
 {{ else }}

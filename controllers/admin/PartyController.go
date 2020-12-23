@@ -57,10 +57,12 @@ func (c *PartyController) Store() {
 // 活动确认
 func (c *PartyController) Confirm() {
 	partyId, _ := c.GetInt("id")
+	confirmLocation := c.GetString("confirm_location")
 	confirmDesc := c.GetString("confirm_desc")
 
 	valid := validation.Validation{}
 	valid.Required(partyId, "id")
+	valid.Required(confirmLocation, "confirm_location")
 	valid.Required(confirmDesc, "confirm_desc")
 	if valid.HasErrors() {
 		c.Data["json"] = common.Ajax(0, "参数错误", nil)
@@ -68,7 +70,7 @@ func (c *PartyController) Confirm() {
 		c.StopRun()
 	}
 
-	err := (&models.Party{}).Confirm(c.GetSession("authUser").(models.User).Id, partyId, confirmDesc)
+	err := (&models.Party{}).Confirm(c.GetSession("authUser").(models.User).Id, partyId, confirmLocation, confirmDesc)
 	if err != nil {
 		c.Data["json"] = common.Ajax(0, err.Error(), nil)
 		c.ServeJSON()
